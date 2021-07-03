@@ -16,7 +16,32 @@ Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://j
 - Undergraduate Resources
 
 
+## Acknowledgements
 
+Throughout my education I have been supported my individuals who have contributed to much of where I have arrived to now directly and indirectly. The following (incomplete) list of individuals are people I owe much to my current situation.
+
+- Julia Markel
+- Michael Cole
+- Manyak Gupta
+- Aditya Chempakasseril 
+- Aisha Dantuluri
+- Soumyaraj Bose
+- Rio Jean  
+- Beryl Nasworthy
+- Anna Tan Altman
+- Scott Rollans
+- Holly Proudfoot
+- Janice Wu
+- Amy Vyhanh Nguyen
+- James Chen
+- Greg Brown
+- Thanh Nguyen
+- Dennis Bonilla
+
+Faculty and Instructors
+- Micahel Cole
+- Michael Holst
+- David Meyer
 
 
 
