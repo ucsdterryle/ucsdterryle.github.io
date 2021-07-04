@@ -5,8 +5,9 @@
 ## Academic Reflections
 - Mistakes I've Made ... 
 - Best Advice I Got ...
-- What I've Learned ...
-- 
+- What I've Learned ... : ``You Only Get One Second Second Chance''
+
+
 ## Academic Projects 
 - Exploration of COVID-19 Genome 
 - 2-Dimensional Ising Model
@@ -23,8 +24,8 @@
   - Calculus
 
 ## Helpful Links and Resources
-- American Mathematics Society: [What is Math for?] (https://www.ams.org/notices/201005/rtx100500608p.pdf)
-- American Mathematics Society: [Ten Lessons I Wish I Had Been Taught] (https://www.ams.org/notices/199701/comm-rota.pdf)
+- American Mathematics Society: [What is Math for?](https://www.ams.org/notices/201005/rtx100500608p.pdf)
+- American Mathematics Society: [Ten Lessons I Wish I Had Been Taught](https://www.ams.org/notices/199701/comm-rota.pdf)
 
 ## Professional and Career Documents
 
