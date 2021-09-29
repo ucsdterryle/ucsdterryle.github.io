@@ -122,6 +122,15 @@ In this example of generating a pie chart with Matplotlib we will use simple var
     plt.pie(pie_tuple)
     plt.show()
 
-    ![pie_chart_netflix_titles](/assets/images/tux.png)
+    ![pie_chart_netflix_titles1](/tutorial_python_pie_chart_netflix_1.png)
 
+This is a very informative visual, however, our pie chart is lacking labels and other details often accompanying visuals to help us understand our data so lets add some parameters to our code and see what else we can add to our plot.
+
+    label = ['TV Shows', 'Movies']
+    explode = (0, 0.1)
+    plt.pie(pie_list, labels=label, explode=explode, autopct='%1.1f%%')
+
+
+    ![pie_chart_netflix_titles2](/tutorial_python_pie_chart_netflix_2.png)
+    
 2. Bar Chart
