@@ -134,3 +134,75 @@ This is a very informative visual, however, our pie chart is lacking labels and 
    ![pie_chart_netflix_titles2](/tutorial_python_pie_chat_netflix_2.png)
     
 2. Bar Chart
+
+Let now try visualizing the data we've collected as a bar chart.  In order to create a bar chart instead of a pie chart we only need to use the bar function and provide values for the x-axis labels/categories and the y-values of the respective categories.
+
+        bar_labels = ['TV Shows', 'Movies']
+        bar_values = [tv_show_count, movie_count]
+
+        plt.bar(bar_labels, bar_values)
+        plt.show()
+
+     ![bar_chart_netflix_titles1](/tutorial_python_bar_chart_netflix_1.png)
+
+Now that we have worked with a somewhat simple part of our data set by looking at how our data is divided between 'Movies' and 'TV Shows', lets look at another column that has more than 2 categories/'values' for our data. 
+
+## Rating
+Every row has a rating indicating the appropriate audience for that particular TV Show or Movie. So lets imagine that we are still exploring our data set and want to know how many different types of categories there could be for rating a TV Show or Movie. To do this there are two approaches we can use. 
+
+1. Unique Function
+Built into the Pandas DataFrame is a function called unique() that will return an array of all the different/unique values found on that column. So what we will do is access the column we are interested in looking at ('rating') and then add the unique() function that will filter out and return the data found in an array. So if we wanted to we can assign a variable to that line of code and it will hold those string values as an array for us to use later down the line if we needed to.
+
+
+        title_ratings = netflix_titles['rating'].unique()
+        
+        array(['TV-MA', 'R', 'PG-13', 'TV-14', 'TV-PG', 'NR', 'TV-G', 'TV-Y', nan,
+       'TV-Y7', 'PG', 'G', 'NC-17', 'TV-Y7-FV', 'UR'], dtype=object)
+
+2. Iterate Through Entire Column of DataFrame
+
+While this probably isn't a preferred method to access all the unique values in the 'rating' column, I provide this approach since it could be used in other contexts where you are counting the (unique) occurence or recurrence of a value. You are free to use any data structure you would like such as a list or set, but I will use a dictionary in thise example hoping that I will introduce you to the dictionary data structure. This code is written where when a new rating that has not been encountered before, it is added as a 'key' for the dictionary and the value of 1 is associated with that key. As we iterate through the column, anytime a rating has already been encountered we increment the current value by one, thus keeping track of how many times that rating occurs in our data set.
+
+                netflix_dict={}
+                rating_col = list(movies['rating'])
+               
+                for x in rating_col:
+                    if x not in netflix_dict:
+                        netflix_dict[x]=1
+                    else:
+                        netflix_dict[x]+=1
+                    
+                netflix_dict
+                
+If we wanted to instead use the unique function to help us populate our dictionary with the approriate keys first we can do that following:
+
+                netflix_dict={}
+                rating_categories = movies['rating'].unique()
+               
+                for x in rating_categories:
+                    netflix_dict[x]=0
+                ratings = movies['rating']
+                for x in ratings:
+                    if(x in rating_categories):
+                        netflix_dict[x]+=1       
+                netflix_dict
+                
+The result will give us a dictionary with these keys and values.
+
+                {'TV-MA': 2863,
+                 'R': 665,
+                 'PG-13': 386,
+                 'TV-14': 1931,
+                 'TV-PG': 806,
+                 'NR': 84,
+                 'TV-G': 194,
+                 'TV-Y': 280,
+                 nan: 0,
+                 'TV-Y7': 271,
+                 'PG': 247,
+                 'G': 39,
+                 'NC-17': 3,
+                 'TV-Y7-FV': 6,
+                 'UR': 5}
+                 
+                 
