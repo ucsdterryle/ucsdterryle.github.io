@@ -143,7 +143,7 @@ Let now try visualizing the data we've collected as a bar chart.  In order to cr
         plt.bar(bar_labels, bar_values)
         plt.show()
 
-     ![bar_chart_netflix_titles1](/tutorial_python_bar_chart_netflix_1.png)
+   ![bar_chart_netflix_titles1](/tutorial_python_bar_chart_netflix_1.png)
 
 Now that we have worked with a somewhat simple part of our data set by looking at how our data is divided between 'Movies' and 'TV Shows', lets look at another column that has more than 2 categories/'values' for our data. 
 
