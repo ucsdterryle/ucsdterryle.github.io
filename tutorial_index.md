@@ -9,7 +9,7 @@ In addition to providing some basic introduction to how to use and execute certa
 The following tutorials in python are written in Jupyter Notebook and can be downloaded from my GitHub.
 1. [Initial Surveying of a Data Set and Generating Plots with Matplotlib](https://ucsdterryle.github.io/tutorial_python_survey_data)
 2. [Simulating a Deck of Cards for Poker and Blackjack](https://ucsdterryle.github.io/tutorial_python_simulate_card_games1)
-3. [Creating Classes]https://ucsdterryle.github.io/tutorial_python_classes)
+3. [Creating Classes](https://ucsdterryle.github.io/tutorial_python_classes)
 
 # R Tutorials
 (Pending)
@@ -18,4 +18,4 @@ The following tutorials in python are written in Jupyter Notebook and can be dow
 (Pending)
 
 # C/C++ Tutorials
-1. [Creating Classes]https://ucsdterryle.github.io/tutorial_C_classes)
+1. [Creating Classes](https://ucsdterryle.github.io/tutorial_C_classes)
