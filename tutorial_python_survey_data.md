@@ -206,3 +206,91 @@ The result will give us a dictionary with these keys and values.
                  'UR': 5}
                  
                  
+## Distribution of Ratings Across TV Shows and Movies
+Out of curiosity lets look at how the ratings are distributed over movies and TV shows. This will require us to first filter out all the movies then tally the ratings from those results. This time we will approach this by first creating an array of boolean values where True appears for the entry type we are interested in. We will then use that array of boolean values to create a new DataFrame that only uses rows with True values. 
+
+                movie_filter = netflix_titles['type'] == 'Movie'
+                movies = netflix_titles.loc[movie_filter]
+                movies
+                
+The variable 'movies' is a Pandas DataFrame with only movies (no TV Shows). Like before, we will use a dictionary to tally up the number of movies with ratings for audience appropriateness.
+
+                movie_rating_dict = {}
+                for x in movies['rating']:
+                    if x in movie_rating_dict:
+                        movie_rating_dict[x]+=1
+                    else:
+                        movie_rating_dict[x]=1
+                 
+                movie_rating_dict
+                
+                {'TV-MA': 1845,
+                 'R': 663,
+                 'PG-13': 386,
+                 'TV-14': 1272,
+                 'TV-PG': 505,
+                 'NR': 79,
+                 'TV-G': 111,
+                 'TV-Y': 117,
+                 nan: 5,
+                 'PG': 247,
+                 'G': 39,
+                 'TV-Y7': 95,
+                 'NC-17': 3,
+                 'TV-Y7-FV': 5,
+                 'UR': 5}
+                 
+                 
+We can repeat the same process to find the disbution of ratings for TV show by first filtering out the TV shows.
+
+                tv_show_filter = netflix_titles['type'] == 'TV Show'
+                tv_shows = netflix_titles.loc[tv_show_filter]
+                tv_shows
+                
+                tv_show_rating_dict = {}
+                for x in tv_shows['rating']:
+                    if x in tv_show_rating_dict:
+                        tv_show_rating_dict[x]+=1
+                    else:
+                        tv_show_rating_dict[x]=1
+                 
+                tv_show_rating_dict
+
+                {'TV-MA': 1018,
+                 'TV-14': 659,
+                 'TV-PG': 301,
+                 'TV-Y7': 176,
+                 'TV-G': 83,
+                 'TV-Y': 163,
+                 'NR': 5,
+                 nan: 2,
+                 'R': 2,
+                 'TV-Y7-FV': 1}
+                 
+## Yearly Distribution of the Number of Movie and TV Shows Released
+One column in our DataFrame is the the release year. Unlike the previous data we worked with ('type' and 'rating') the 'release_year' is a numerical value representing the year a entry was released thus the numerical value are ordinal. Let first explore this column by finding the earliest movie released in our data. We will first access the column and place all the values into a list data structure which has a sort function that can order the values in numerical order. 
+
+                    release_year_dict = {}
+                    for x in netflix_titles['release_year']:
+                        if x in release_year_dict:
+                            release_year_dict[x]+=1
+                        else:
+                            release_year_dict[x]=1
+                            
+                    release_year_dict
+                    
+Notice how the dictionary has the year of release serving as the keys and the number of titles released that year as the values. But this is a very extensive dictionary with a long list of keys (that are unordered). So maybe we might want to look at the earlist year. What we will do is take all the keys from this dictionary and put them into a list data structure and use the list data structure function to sort it numerically.
+
+                    release_list = list(release_year_dict.keys())
+                    release_list.sort()
+                    release_list
+                    
+                    
+                    
+                    
+                    
+                    #release_list = [x for x in netflix_titles['release_year'].unique()]
+                    
+                        
+                    
+                    
