@@ -142,6 +142,21 @@ We now have a organized collection of instances when a certain party was critica
          'AfD': 31,
          'Others': 29}
 
+We can compute the proportion of the occurrences that a party was critical to the number of times a party was critical to a coalition formation.
+
+        power = {}
+        for key, value in power_count.items():
+            power[key] = value/237
+        power
+
+        {'CDU_CSU': 0.16455696202531644,
+         'SPD': 0.1729957805907173,
+         'Green': 0.14767932489451477,
+         'FDP': 0.13924050632911392,
+         'Left': 0.12236286919831224,
+         'AfD': 0.1308016877637131,
+         'Others': 0.12236286919831224}
+
 But, on second thought maybe it might be useful later to know how many times a certain party was critical to the formation of a coalition when the coalition was of a certain size. Since the coalition size range from 3 to 5 this won't be too tedious to do. I will just rewrite the previous code with some extra lines to tally the occurrences.
 
         total = 0
