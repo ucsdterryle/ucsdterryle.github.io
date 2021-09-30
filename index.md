@@ -23,6 +23,11 @@
   - Precalculus
   - Calculus
 
+## Programming Tutorials
+
+- [Programming Language Tutorials](https://ucsdterryle.github.io/tutorial_index)
+
+
 ## Helpful Links and Resources
 - American Mathematics Society: [What is Math for?](https://www.ams.org/notices/201005/rtx100500608p.pdf)
 - American Mathematics Society: [Ten Lessons I Wish I Had Been Taught](https://www.ams.org/notices/199701/comm-rota.pdf)
