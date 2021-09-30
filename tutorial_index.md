@@ -10,6 +10,7 @@ The following tutorials in python are written in Jupyter Notebook and can be dow
 1. [Initial Surveying of a Data Set and Generating Plots with Matplotlib](https://ucsdterryle.github.io/tutorial_python_survey_data)
 2. [Simulating a Deck of Cards for Poker and Blackjack](https://ucsdterryle.github.io/tutorial_python_simulate_card_games1)
 3. [Creating Classes](https://ucsdterryle.github.io/tutorial_python_classes)
+4. [Using Itertools](https://ucsdterryle.github.io/tutorial_python_itertools)
 
 # R Tutorials
 (Pending)
