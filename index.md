@@ -41,6 +41,7 @@
 
 Throughout my education I have been supported my individuals who have contributed to much of where I have arrived to now directly and indirectly. The following (incomplete) list of individuals are people I owe much to my current situation.
 
+### Classmates and Colleagues
 - Julia Markel
 - Yuixuan
 - Manyak Gupta
@@ -59,14 +60,15 @@ Throughout my education I have been supported my individuals who have contribute
 - Thanh Nguyen
 - Dennis Bonilla
 - Rubie Garcia Donaghy 
-- 
-Faculty and Instructors
+
+
+### Faculty and Instructors
 - Micahel Cole
 - Michael Holst
 - David Meyer
 
 
-
+<!---
 %**Bold** and _Italic_ and `Code` text
 
 %[Link](url) and ![Image](src)
@@ -85,4 +87,4 @@ Faculty and Instructors
 You can use the [editor on GitHub](https://github.com/ucsdterryle/ucsdterryle.github.io/edit/main/README.md) to maintain and preview the content for your website in Markdown files.
 
 Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
+-->
