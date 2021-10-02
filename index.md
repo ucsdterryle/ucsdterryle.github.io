@@ -9,7 +9,7 @@
 
 
 ## Academic Projects 
-- [Exploration of COVID-19 Genome](https://ucsdterryle.github.io/tutorial_index/exploration_of_covid_19_genome) 
+- [Exploration of COVID-19 Genome](https://ucsdterryle.github.io/exploration_of_covid_19_genome) 
 - 2-Dimensional Ising Model
 - Coherence of Organoid
 - 
