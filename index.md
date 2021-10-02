@@ -4,7 +4,7 @@
 
 ## Academic Reflections
 - Mistakes I've Made ... 
-- Best Advice I Got ...
+- [Best Advice I Got ...](https://ucsdterryle.github.io/best_advice_i_got_index)
 - What I've Learned ... : ``You Only Get One Second Second Chance''
 
 
