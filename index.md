@@ -34,7 +34,7 @@
 
 ## Professional and Career Documents
 
-- [Resume](https://ucsdterryle.github.io/Le_Terry-Resume_DataEngineer_v1) (last updated June 2021)
+- [Resume](https://ucsdterryle.github.io/Le_Terry-Resume_DataEngineer_v1.pdf) (last updated June 2021)
 
 ## Acknowledgements
 
