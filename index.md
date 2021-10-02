@@ -62,7 +62,7 @@ Throughout my education I have been supported my individuals who have contribute
 
 
 ### Faculty and Instructors
-- Micahel Cole
+- Michael Cole
 - Michael Holst
 - David Meyer
 
