@@ -46,3 +46,10 @@ The mass of men lead lives of quiet desperation.
 - Aeschylus
 
 
+“Insofar as physical development takes place in a cultural medium, it becomes a historically conditioned biological process.” 
+- L.S. Vygotsky.
+
+ 
+“The organism, by its life activities, creates what is outside. So organisms create the conditions of their own future which is different from their past.” 
+- Richard Lewontin
+
