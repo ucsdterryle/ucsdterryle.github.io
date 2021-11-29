@@ -1,0 +1,95 @@
+## Coordinate Systems
+
+This tutorial will go over the creation of a coordinate system for a board that is not organized in a cartesian coordinate system.
+
+This can be considered a contrived exercise that is a simple way to design an environment that is organized differently from a normal Cartesian coordinate system with an x and y values to represent a specific location in a 2-dimensional space.
+
+Possible uses of this program is to create a game or a model that operates on an environment partioned as hexagonal blocks or any regular polygon to represent a unit of space.  The challenge is to convert the desired coordinate system into a Cartesian coordinate system which is required by Pygame or any module that is usually based on the more familiar 2-dimensional Cartesian coordinates.
+
+The first thing we need to consider is how our coordinate system works and the parameters needed to represent properly its position in space. This inherently depends on what kind of shape one unit of space will be represented as. Lets start off working with blocks of hexagons to form the individual units of space in our environment.
+
+A (regular) hexagon has 6 sides with equal lengths that are lined up next to one another on what could be described as its parallel side. Though this isn't very specific enough to properly describe the way the environment should be arranged, lets use the images below to clarify. 
+
+(insert picture of a single hexagon)
+
+(insert image of a row of hexagons)
+
+(insert a image of multiple rows of hexagons)
+
+Hopefully, now we see more clearly the unique arrangement for hexagons and how identifying a specific hexagon to represent a single position in our entire environment will be more complicated than the familiar Cartesian coordinate system. Lets first imagine that we are working a small environment that fits a total of 6 hexagons horizontally and 6 hexagons vertically. Try drawing this by hand to get an understanding of what we are trying to achieve and the challenges that come from working with this specific polygon. You will very likely need to or ask yourself some very fundamental questions as you explore this further. One such question is what "direction" will integers of the coordinates increase or increment as you move from hexagon/block to hexagon/block? Will you need to implement an "origin" or (0,0) space?  
+
+So what did you notice? Hopefully one this you might have noticed is how the hexagons are arranged such that there is a hexagon on the row below that is positioned "between" the two hexagons above it. It has this somewhat staggered order from one row to the next. Hopefully many of the different challenges you noticed have a similar theme of how the hexagons are arranged that makes one row slightly at an offset than the row above or below it. Given how you percieve or understand the challenge will help your come up with a coordiante system that can be used to translate it into a cartesian coordinate system. Maybe you noticed that hexagons are only vertically similar every other row and that the row above or below another row will be different from itself. 
+
+Lets try to think about possible ways we can create a system to represent a location on this hexagonal environment. (Now if you aren't able to come up with a system thats fine, but its good to try just to understand the challenges and benefits of various options). There are 3 systems we will go over in this tutorial: Offset, Axial, and Cube.
+
+## Offset Coordinates
+
+Offset coordinates might be the most direct and intuitively similar system to cartesian coordinate system. In fact it is essentally the same. This system will use a pair of integers to identify the position in the environment. Lets assign the top left most hexagon as (0,0) and proceedng through the row the hexagon directly to its right (0,1), and continue to the end the last hexagon will be (0,5). The next (OFFSET) row below the row we just assigned coordinates to will be (1,0), (1,1), ... (1,5). If we continue and assign coordinates to all the hexagons we will get the following:
+
+(insert image of complete coordinates)
+
+Essentially the first integer/value/coordinate identifies/represents the (hortizontal) row and the second integer/value/coordiante identifies the (vertical) column  of the hexagon. Like cartesian coordinates we are using vertical axis and horizontal axis to help organize the coordinate system.
+
+## Cube Coordinates
+
+The remaining two systems operate by not relying on a vertical axis.  Instead, the cube coordinates will use a diagonal axis where the first integer will be the same along this diagonal (path). Lets start by assigning 0 to the first coordinate of the top-left most hexagon and fill in 0's through all the hexagons along the diagonal going down and to the right. The first coordinate will represent the diagonal axis and will increment by 1 as we move horizontally. The horizontal row/axis will represent the second coordinate value. Thus, all the values in the second coordinate will be the same across the entire row. You can assign this value 0 or even a negative integer like -3. So along the first row we should have: (0,-3), (1,-3), (2,-3), (3,-3), (4,-3), (5,-3) or if you used (0,0) for the first hexagon (0,0), (1,0), (2,-3), (3,0), (4,0), (5,0). 
+
+You ca
+The remaining two systems operate by not relying on a vertical axis.  Instead, the cube coordinates will use a diagonal axis where the first integer will be the same along this diagonal (path). Lets start by assigning 0 to the first coordinate of the top-left most hexagon and fill in 0's through all the hexagons along the diagonal going down and to the right. The first coordinate will represent the diagonal axis and will increment by 1 as we move horizontally. The horizontal row/axis will represent the second coordinate value. Thus, all the values in the second coordinate will be the same across the entire row. You can assign this value 0 or even a negative integer like -3. So along the first row we should have: (0,-3), (1,-3), (2,-3), (3,-3), (4,-3), (5,-3) or if you used (0,0) for the first hexagon (0,0), (1,0), (2,-3), (3,0), (4,0), (5,0). 
+
+You can follow the procedure for filling in the first values along the next axis of diagonal hexagons starting with (1,-3) or (1,0). Going down the diagonal, your coordinates should be: (1,-3), (1,-2), (1,-1), (1,0), (1,1), (1,2) and if you used the 0  you can adjust accordingly. Again, notice how all the first coordinates are the same since they are on the same diagonal axis but the second coordinate vary due to the different horizontal row it is on. 
+
+Complete the remaining hexagons. For this system going from left to right increases in value and going from left to right diagonally increases in value. Thus, your final result will probably contain a few hexagons with negative integers for its coordinates. 
+
+(insert image of compalte  Axial corodinate)
+
+## Cube Coordinates
+
+The last system to demonstrate is the cube coordinate system that uses 3 integers to represent the position of a hexagon. Using 3 integers to locate a hexagon implies that we are using 3 axes or 3 dimensions. The shape of a regular hexagon has 3 pairs of parallel edges/sides. The cube coordinates treates each parallel edge as a axis or coorindate value or dimension. Due to this additional axis, moving horizontally left and right would mean both diagonal axes are also changing while we remain on the same row. Thus, moving one hexagon to the left or right horizontally means both the values of representing the diagonal axes will change. The three axes for the cube coordinates are: right diagonal, left diagonal, and horizontal.
+
+To help navigate this system it is best to have an environment that is symmetrical and the origin is the center hexagon. With this convention we can impose a constraint to help ensure the integers for each position of the hexagon are correct by : x+y+z = 0, where x, y, and z, are the coordinates. It is arbitrary to which axis x ,y, and z represent but lets say x is the diagonal right axis, y is the diagonal left axis, and z is the horizontal axis. Assigning (0,0,0) as the center hexagon, the hexagon adjacent to the right would then be (1,-1,0), the next adjacent right hexagon will be (2,-2,0) and then (3, -3, 0). Going to the left from the origin it will be : (-1,1,0), (-2,2,0), (-3,3,0). Now try to complete the rest of the hexagons.
+
+## What next?
+
+So now that we have developed a coordinate system using a grid of hexagons or a tesselation of hexagons, what could be do with this? Well lets say that our original motivation was to build a (computer) game or model where the board of the game, environment of the model, or agents acting in the model is/are organized in a way that arranges hexagons in this manner. How will we provide the coordinate system built on hexagons to operate on a machine or module who's input are cartesian coordinate values? 
+
+## Drawing the Board/Environment
+
+Providing the mathematical instructions on how to interpret the hexagonal coordinate system into a 2-dimension cartesian would first require (at least it wil lbe helpful to first) drawing the board/environment/agents as individual or collection of hexagons.
+
+Lets go over and review some simple geometry so we can property construct/draw an individual regular hexagon. The regular hexagon is an appropriate first choice to work with as it has edges/sides of equal length and equal size of internal angles of 120 degrees. Further, you may remember from your high school math class that in order to find the area of a regular polygon you would cut the polygon into equal triangles and find the area of one and multiply it by the number of triangles that fill the entire polygon. The triangle we would use for a hexagon would end up being equilateral triangles with three 60 degree angles and sides that are all equal and have the same length as the edge of the hexagon. I will leave the computation to you as it should require high school math. After all the arithmetic you should determine that with a hexagon with edges of size 2, the distance from one vertex to another vertex directly opposite from it is 4, or double the length of the edge of the hexagon. 
+
+To draw one hexagon with the help of the computer we should use angles and trigonometry. We should also consider what parameters or inputs we would need to draw a single hexagon. There are many approaches but one approach is to use the center of the hexagon and draw the hexagon around the center. Something you might have thought about earlier in the exercise with the coordinate system is how the hexagons are oriented. Should they be standing on its pointed vertex or laying on its parallel edge. This is arbitrary to your preference, but for this tutorial we will orient our hexagons standing on its vertex, or vertically oriented.
+
+To help us draw the hexagon we can write a function that will take in certain parameters and will output the coordinates we need to draw lines to construct a regular hexagon.  The parameters our function would need would be the location for the center of the polygon, the length of its side, and the number of sides in our polygon. Since we know that were are working with a hexagon it might be unnecessary to include the number of sides, but generalizing our function to possibly construction other polygons lets keep it generic in this manner. I will be using Pygame to draw our hexagons so it has a function pygame.draw.polygon which takes in tuple or list representing the coordinates of the vertices (other parameters of this funtion are surface to draw on, thickness of the edges to draw, and color to fill the polygon). Thus, we need to write a function that will generate 6 coordinates after passing in the center coordinates, the size of the edge or size of the circumradius or inradius or any other value to help determine the size of our hexagon.
+
+There are many ways to write our function, so feel free to begin writing your function on your own now or follow my tutorial which is one of many ways to approach this problem.
+
+Drawing each side of the polygon requires 2 points. Since we are only passing in the center coordinate, some length found in/on our polygon, and the number of sizes of our polygon, we have to use the center to anchor where our coordinates will be generated from. We need a reference point. Suppose we pass in the the edge of the polygon, then we can construct equilateral triangles around the center to generate the vertices we need. Imagine that we construct our first triangle in the middle right side of the hexagon. The vertex of this triangle are 30 degrees clockwise above the horizontal and 30 degrees counterclockwise below the horizontal. Using the number of sizes, we can iterate through every integer to help iterate through each equilateral triangle on our hexagon. As we iterate from 0 to 5 or 1 to 6 we can use these integers to help identify the angles we need to compute the coordinates of the vertices. Since I choose to orient my hexagon vertically the vertices do not lie on the horizontal line with the center coordinate being passed into the function. So we will have (4) vertices 30 degrees above and below the horizontal line along the center. Since we have 6 equilateral triangles, each with 60 degrees for all their angles, ever increment of 0 to 5 or 1 to 6 will represent our iteration through each of the 6 triangles and thus will be in increments of 60 degrees. Think about all of this and then continue readings.
+
+Putting together all of this, we will write our function as so:
+
+Since python iterates through an interger 6 from 0 to 5, we will generate our first vertex with -30 degrees, then 30 degrees, then 90, .... and end at 270 degrees.
+
+def gen_hexagon_vertex(center, edge, n):
+  #center is tuple of 2 integers
+  hex_vertices = []
+  for i in range(n):
+    angle_deg = (60*i) - 30
+    angle_rad = angle_deg *(180/PI)
+    pt = (center[0]+math.cos(angle_rad)*edge, center[1]+math.sin(angle_rad)*edge
+    hex_vertices.append(pt)
+   return hex_vertices
+   
+   
+   
+
+## Construct Environment
+
+Now that we have written a function to draw one hexagon we can now generate an entire environment of hexagons. Recall that our hexagons are oriented vertically and are generated from passing in a center coordinate value, the center of adjacent hexagons will be length of the edge with a factor of sqrt(3). The height of each hexagon is the length of the edge wih a factor of 2. Thus, given the parameter of how we would want to construct our environment we can just iterate from one hexagon to the next and just add the length of the distance between centers until we generate enough hexagons horizontally and then begin the next row of hexagons by shifting vertically down the by a factor of 3/2 or 1.5 the length of an edge of the hexagon and to the left or right by sqrt(3)/2.
+
+
+    
+
+
+
