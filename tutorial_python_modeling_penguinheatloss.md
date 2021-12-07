@@ -6,7 +6,16 @@ This modeling exercise comes from an article in Quanta: Math of the Penguins(htt
 
 Professor David Meyer used the work done by Fancois Blanchette at the University of California, Merced, as an example and exercise to demonstrate in lecture the process of critically looking at the work of another researcher and trying to recreate and validate the results published and to find ways to simplify and extend on their work.
 
-The demonstration done in lecture was made in Mathmatica and so this article will explain how this demonstration can be translated into Python and how to develop in general a agent-based computational model in python for other modeling applications.
+The demonstration done in lecture was made in Mathmatica and so this article will explain how this demonstration can be translated into Python and how to develop in general a agent-based computational model in python for other modeling applications. This exercise is a Monte Carlo simulation where there is a configuration and the changes to this configuration follows probabilistic rules that pushes into a direction that may lead to what we expect to see.
+
+## Simulation Development Increment Outline
+1. Outline and create the files and structures of the simulation. Design the sequence of computation and functions in each loop iteration.
+2. Design a functioning agent-based model simulation with a single penguin/agent.
+3. Create a draw/visualization component of the simulation that will generate visual representations of the system while simulation is running.
+4. Implement a function in the simulation that will compute the heatloss of the individual penguin/agent
+5. Implement a behavior function for the penguin/agent to determine next position it will move to in its environment
+6. Implement a generator for adding additional penguins into the simulation
+7. Refine the functions to reflect more accurately (or less arbitrarily) the behavior and computation in the simulation.
 
 ## Modules and Resources
 This article will rely on the use of several Python modules to help build this model and generate a visual simulation to observe the changes to the penguins position and their movement during the duration of the simulation run. To generate the visual of the simulation we will use Pygame which is usually used to create games that have visual graphics that respond to users inputs and commands.  However, we will leverage Pygame more for its capabiliites for generating simple visual graphics of polygons and design the rules and parameters of the simulation to reflect the conditions identified in the article. 
@@ -47,13 +56,72 @@ One of the critical aspects of our simulation is routinely computing the individ
 
 In our simulation we will need to write a function that will routinely iterate through all the penguin/agents and update the temperature of each penguin/agent at each time step. This is necessary since the heat loss will determine the new temperature of each penguin/agent which will then determine which penguin will need to move in order to avoid lossing more heat by finding a new location that has more neighbors to help it accumulate and retain heat. 
 
-### Drawing the Penguins/Agents
-The use of Pygame will help us visualize the changes of the simulation at each time step. While this isn't vitally necessary it does add an extra level of understanding the changes happening throughout our simulation and see how our model behaves. However this extra layer of visualization does add a certain degree of complexity in our code. We will later discuss the various layers of of how our Python code will be organized and interacting to properly execute the simulation, but for now we will ease our way towards that direct by first talking about how we will draw the individual agents with Pygame. There are two ways to approach drawing the hexagons into the screen/window with Pygame: drawing a set of lines forming a hexagon or using the polygon function. Either approach requires passing in the coordinates of the hexagons vertices. AS a reminder, we will need to use cartesian coordinates, not the hexagonal coordinate system we discussed above. In addtion, Pygame uses a coordinate system where the top left corner is (0,0) and the bottom right corner is (n,m) thus the larger we make our window/environment the larger n increases in a positive manner even though the window is increasing its height downwards and its width is increasing postively to the right by m. The polygon function in Pygame needs the center of the shape, the color to fill the shape or color of the edges, and an ordered lists of cartesian coordinate values to draw the vertices and lines connecting vertice to another to draw each edge. 
+### Drawing the Penguins/Agent
+The use of Pygame will help us visualize the changes of the simulation at each time step. While this isn't vitally necessary it does add an extra level of understanding the changes happening throughout our simulation and see how our model behaves. However, this extra layer of visualization does add a certain degree of complexity in our code. We will later discuss the various layers of of how our Python code will be organized and interacting to properly execute the simulation, but for now we will ease our way towards that direction by first talking about how we will draw the individual agents with Pygame. There are two ways to approach drawing the hexagons into the screen/window with Pygame: drawing a set of lines forming a hexagon or using the polygon function. Either approach requires passing in the coordinates of the hexagons vertices. AS a reminder, we will need to use cartesian coordinates, not the hexagonal coordinate system we discussed above. In addtion, Pygame uses a coordinate system where the top left corner is (0,0) and the bottom right corner is (n,m) thus the larger we make our window/environment the larger n increases in a positive manner even though the window is increasing its height downwards and its width is increasing postively to the right by m. The polygon function in Pygame needs the center of the shape, the color to fill the shape or color of the edges, and an ordered lists of cartesian coordinate values to draw the vertices and lines connecting vertice to another to draw each edge. 
 
 The task before us is to compute the vertices that will outline the hexagon. This exercise should be done on paper and pen, and will be a simple refresher of high school math/geomtery. Mainly recall that a hexagon is a regular polgon with 6 sides of equal sides/edges. After some geometry you might remember that a hexagon can be partitioned into 6  equilateral triangles. We willuse some trigonometry to compute the (x,y) coordinates as we iterate around the center from 0 degrees to 360 degrees. Now that you have an understanding of the simple math our function will need to engage it, we need to write a function that will take in  the coordinates of the center of the hexagon, use a (for) loop to compute the (x,y) coordinate values using sine and cosine and output a list of 6 x and y values.
 
 Once we create a function to generate our 6 coordinates for the vertices of our hexagon we will use that output and pass that data into the pygame.draw.polgyon() function to draw the edges of a single hexagon.  
 
+
+### Generating Multiple Penguins/Agents
+Our simulation needs more than one penguin/agent to demonstrate what we want to study. So in order to generate additional penguins/agents we can create a generator class to help add additional pegnuins to the simulation and keep track of all of them as they populate the board/environment. This extra class isn't necessary and the generation of additional penguins/agents can be done simply by declaring a set amount of penguins/agents when initializing the simulation but for other kind of agent based models and simulations creating a generator might be helpful. 
+
+To create more than 1 penguin/agent without a generator would simply rely on having a variable that can be changed that indicates how many penguins/agents the simulation should initialize. Each pegnuin agent can be an index value in a list or dictionary containing the agents. The only complication is (randomly) distributing the penguins across the board/environment at the start/initial time (t=0). 
+
+### Penguin Movement
+In Professor Meyer's simulation, the penguin that moved was selected by probability weighted by a penguin's temperature. The colder (lower temperature) the penguin the more likely it would move and inversely the warmer (higher temperature) penguin would have a lower probability of moving. 
+
+(insert code to compute the probability based on temperature)
+
+In one complete run of a simulation Professor Meyer choose to have 2000 steps. This was a value that can be changed. He called this variable Nsteps = 2000.
+
+As mentioned in class, this is a simplification of the real world dynamics and observation of the penguins as more than 1 penguin is moving at any given moment. But this simplication can be changed and updated to reflect something closer to the real world observation.
+
+Another observation mentioned in class is that penguins in the middle might get too hot if they stay in the middle and might need to make their way out from the middle of the huddle.
+
+### New Position
+At each time step a penguin/agent selected to move (as a result of its temperature) will move in a another position. How this penguin/agent will move will need to be dictated by some rule based on our understanding of the real world observation and translated in some way into our code. In our simple approach to this action, our penguins/agents will take a step to another position in any of the six adjacent spaces around its current position. However, any (or all) of the spaces could be occupied by another penguin. So we would need to have our function check and make sure the new proposed position of our penguin is unoccupied. In addition, this initial version of the new position function will require that the new position have at least two penguins adjacent to our current position after moving to a new position (the idea being that moving toa new position with less than 2 penguins directly adjacent to it will result in seperating from the huddle entirely). The last condition is a probabilisitic. Of the viable choices to move the penguin (based on vacancy and number of adjacent penguins in the new position) new temperatures are computed at each potential position the penguin can move to. The difference between the new temperatures and the current temperature will determine a probability of that position being selected. A position resulting in a warmer temperature than the current will have higher probability and a position resulting in a colder temperature (Monte Carlo).
+
+So to write this function we will select a random position from the six possible positions surrounding the penguin. Recall that the adjacent hexagons in clockwise order relative to the current position (x,y) are: (x+0,y-1), (x+1,y+0), (x+1,y+1), (x+0,y+1), (x-1,y+1),(x-1,y0) 
+
+
+        def count_adjacent_penguins(position):
+          """Function to count the number of adjacent penguins surrounding a position on the board"""
+          candidate_position = [(position.x+0, position.y-1), (position.x+1, position.y+0), (position.x+1, position.y+1), (position.x+0, position.y+1), (position.x-1, position.y+1),(position.x-1, position.y+0)]
+          count = 0
+          for i in candidate_position:
+            if (board.check_vacant(i)==1):
+              count+=1
+          return count
+
+        def new_position(self):
+          #Get coordinates of all six spaces surrouding current penguin
+          candidates=[] #list of viable positions after screening
+          possible_spaces = [(self.x+0,self.y-1), (self.x+1,self.y+0), (self.x+1,self.y+1), (self.x+0,self.y+1), (self.x-1,self.y+1),(self.x-1,self.y+0)]
+          #Check if any of the spaces in possible_spaces is occupied, only retain vacant spaces
+          for i in possible_spaces:
+            if(board.check_vacant(i) == 0):
+              #if its vacant and has at least two (>1) penguins adjacent keep it
+              if(count_adjacent_penguins(i)>1):
+                candidate.append(i)
+
+          tmp=[]  
+          #Compute the potential temperature at the remaining positions
+          for i,x in enumerate(candidates):
+            tmp1 = compute_temp(x)
+            #How the probabilites are computed can be up to you to be simple or complex
+            tmp.append(compute_temp(x))
+
+
+      
+    
+    
+  
+
+
+## Simulation Mechanics
+Professor Meyer's simulation 
 
 
 At this time these three attributes (ID, location, temperature) are sufficient to get us started but we are able to and can add more later to better develop our simulation.
