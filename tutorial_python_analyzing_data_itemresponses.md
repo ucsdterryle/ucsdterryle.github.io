@@ -433,7 +433,7 @@ Normalize Results for Question 10. Since we have over 200,000 responses the freq
 
 Now lets generate a visualization of these tables we created. The benefit of Python and Matplotlib is to generate visualization plots that can help use interpret and analyze our results without combing through an endless series of tables like we have above. So lets prepare our data for Matplotlib by putting the tables into a list.
 
-We have over 300 tables in contigency_pct. So lets just plot one set for Question 10. 
+We have over 300 tables in contigency_pct. So lets just plot one set for Question 1. 
 
                                 filtered_crosstab_pct_10=[]
                                 
@@ -457,3 +457,6 @@ We have over 300 tables in contigency_pct. So lets just plot one set for Questio
                                     heatmap2d(x)
                                     
 ![Heat Map](/heat_map_crosstab_math_data.png)                                
+
+From what you see above is for Question 1 and 2, the most common sequence of responses was selecting C for Question 1 and then selecting B for Question 2. From our table we see that there was nearly 57% of the over 200,000 responses gave this sequence. The next highest frequency was selection B for Question 1 and then B for Question 2.
+
