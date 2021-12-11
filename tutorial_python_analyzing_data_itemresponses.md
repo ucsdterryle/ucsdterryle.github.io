@@ -456,4 +456,4 @@ We have over 300 tables in contigency_pct. So lets just plot one set for Questio
                                 for x in filtered_crosstab_pct_10:
                                     heatmap2d(x)
                                     
-![Heat Map](/heat_map_crosstab_math_data.png)                                
+![Heat Map](heat_map_crosstab_math_data.png)                                
