@@ -133,17 +133,40 @@ It took approximately 15 minutes to query 1500 accession numbers from the NCBI d
 
 This step in the work flow is where things will start to intesify with coding and planning for the database.
 
-The reference genome sequence is currently coded as nucleotides. We will need to convert our reference genome into amino acid/proteins and parse them according to the different regions. Using the information from the annotation file we can parse our reference genome and then convert it into amino acid sequences.
+The reference genome sequence is currently coded as nucleotides. We need to first understand how we would like to align our samples to the reference genome. There are various approaches as we have different versions of Blast we could use. 
+
+| BLAST Option | Query Type | Database Type | Comparison | Notes |
+|:------------:|:----------:|:-------------:|:-----------:|:------------:|
+| blastn | Nucleotide | Nucleotide | Nucleotide-Nucleotide | | 
+| blastp | Protein | Protein | Protein-Protein| |
+| tblastn | Protein | Nucleotide | Protein-Protein | The database is translated into protein |
+| blastx | Nucleotide| Protein | Protein-Protein | The queries are translated into protein |
+| tblastx | Nucleotide | Nucleotide | Protein-Protein | The queries and database are translated into protein |
+
+We can actually use any of the options listed above but since we are ambitious to the amount of samples we want to process, we want to be intentional about which one. We can convert our reference genome sequences into amino acids/protein as well as our samples. However, once we translate our nucleotides into amino acids we lose any information to the nucleotides that were possibly deleted or inserted that resulted from mutation. However, processing 30,000 possible mutation locations would be overwhelming and those individual nucleotide mutations might not have big ramifications to the overall protein production. 
+
+The option we will ultimately choose is 'tblastx' as we will use BLAST to convert our nucleotide sequences in our reference genome and our samples and only when an amino acid change is present. 
+
+So what we will need to do create a database of each of the CDS regions represented with nucleotides.
+
+We will need to parse the reference genome according to the different regions. Using the information from the annotation file we can parse our reference genome relative to the CDS regions of interest.
+
+To create a database we will use 'makeblastdb' Unix Executable File. 
+
+        ./makeblastdb -in cds-YP009724389_1.fasta -parse_seqids -blastdbversion 5 -title "SARS-CoV-2 DNA DB YP0097243891" =dbtype nucl
 
 
 
 5. Running Blast Alignment on the Sample Genomes 
 
+Once we have created our database we will run the 'tblastx' Unix Executible File.
+
+        ./blastx -query MT_query_completeOnly.fasta -out MToutput.txt -outfmt 0 -num_alignments 2 -evalue 0.00001
+        
+Now that we have run our alignments, we will need to scan through the results to see if the results are reasonable.
+
+6. Collecting Information and Creating Database of Results
+
+This next part of our project will require us to think through the data we need and wish to use and create a database taht will allow us to query information based on a number of parameters. 
 
 
-
-
-
-1. Obtaining the COVID-19 Reference Genome and Annotation File
-2. Obtaining the 200 genome samples from GenBank
-3. 
