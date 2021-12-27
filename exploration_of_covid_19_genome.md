@@ -163,32 +163,32 @@ One repetitive task that we will encounter is reading from a FASTA file and writ
 
   1. To read the file we simple run this code:
 
-        with open("sequence.fasta", "r") as reference_file:
-          seq=''
-          for line in reference_file:
-            if(line[0]==">"):
-              line = line.split("|")
-              id = line[3]
-            else:
-              line.strip("\n")
-              seq=seq+line
+          with open("sequence.fasta", "r") as reference_file:
+            seq=''
+            for line in reference_file:
+              if(line[0]==">"):
+                line = line.split("|")
+                id = line[3]
+              else:
+                line.strip("\n")
+                seq=seq+line
 
 What the simple code above does is retrieve the accession number or identification number of the reference genome (used by NCBI) and its genome sequence and saves them in the declared varialbes 'id' and 'seq'. The few things we needed to do was to strip the new line character from the sequence each time and append/concatenate it to the existing sequence as we iterate through each line of the FASTA file. 
 
   2. To write the information to file we run this code (assuming already have the information held in a variable or data structure of some sort, let us assume that we have a dictionary of sequences where the key is the 'id' and the value is the sequence information):
 
-        with open("writeSequence2File.fasta", "w") as writeSeq2File:
-          for key, seq in sequence_dictionary.items():
-            write='>'+str(key)+'\n'
-            writeSeq2File.write(write)
-            seqSize = len(seq)
-            while(seqSize>60):
-              write=seq[0:60]+'\n'
+          with open("writeSequence2File.fasta", "w") as writeSeq2File:
+            for key, seq in sequence_dictionary.items():
+              write='>'+str(key)+'\n'
               writeSeq2File.write(write)
-              seq=seq[60:]
-              seqLen=len(seq)
-            writeSeq2File.write(seq+'\n')
-          
+              seqSize = len(seq)
+              while(seqSize>60):
+                write=seq[0:60]+'\n'
+                writeSeq2File.write(write)
+                seq=seq[60:]
+                seqLen=len(seq)
+              writeSeq2File.write(seq+'\n')
+
 The two code snippets of code will guide you to be able to extract and save information throughout this project.               
 
 
