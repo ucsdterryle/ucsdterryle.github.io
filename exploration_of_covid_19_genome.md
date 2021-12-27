@@ -155,6 +155,41 @@ To create a database we will use 'makeblastdb' Unix Executable File.
 
         ./makeblastdb -in cds-YP009724389_1.fasta -parse_seqids -blastdbversion 5 -title "SARS-CoV-2 DNA DB YP0097243891" =dbtype nucl
 
+There are a few scripts that we would like to write (I will be writing them in python) that will do some common taks for us throughout this project. 
+
+First let talk about FASTA format. I was unfamiliar with FASTA format prior to enrolling in my first bioinformatics course but came to learn that it was just another format used in the bioformatics field when handling files storing information on genetic information. It generally is a format with simple text where the sequences are in segments of 60 characters per line. In addition prior to providing the genetic information a header with any pertinent information about the organism is provided to the user. This line is a continuous text that terminates  with a new line, and is not restricted to the 60 characters like the genetic information. This header line also begins with a ">" to signal that the line is a header. Thus a fast file could contain multiple entries for different organisms. (Note that I use the term organism very generally and loosely as the genetic infroamtion doesn't have to be from an organism but just a protein found in certain cell or tissue.) 
+
+One repetitive task that we will encounter is reading from a FASTA file and writing a file in FASTA format. Lets tackle the reading from a FASTA file. Lets take the example of reading from the reference genome. The first line will contain the header and the metadata and the line proceeding it will have its roughly 30,000 nucleotide sequence.
+
+  1. To read the file we simple run this code:
+
+        with open("sequence.fasta", "r") as reference_file:
+          seq=''
+          for line in reference_file:
+            if(line[0]==">"):
+              line = line.split("|")
+              id = line[3]
+            else:
+              line.strip("\n")
+              seq=seq+line
+
+What the simple code above does is retrieve the accession number or identification number of the reference genome (used by NCBI) and its genome sequence and saves them in the declared varialbes 'id' and 'seq'. The few things we needed to do was to strip the new line character from the sequence each time and append/concatenate it to the existing sequence as we iterate through each line of the FASTA file. 
+
+  2. To write the information to file we run this code (assuming already have the information held in a variable or data structure of some sort, let us assume that we have a dictionary of sequences where the key is the 'id' and the value is the sequence information):
+
+        with open("writeSequence2File.fasta", "w") as writeSeq2File:
+          for key, seq in sequence_dictionary.items():
+            write='>'+str(key)+'\n'
+            writeSeq2File.write(write)
+            seqSize = len(seq)
+            while(seqSize>60):
+              write=seq[0:60]+'\n'
+              writeSeq2File.write(write)
+              seq=seq[60:]
+              seqLen=len(seq)
+            writeSeq2File.write(seq+'\n')
+          
+The two code snippets of code will guide you to be able to extract and save information throughout this project.               
 
 
 5. Running Blast Alignment on the Sample Genomes 
@@ -169,4 +204,15 @@ Now that we have run our alignments, we will need to scan through the results to
 
 This next part of our project will require us to think through the data we need and wish to use and create a database taht will allow us to query information based on a number of parameters. 
 
+We will use the output format of  __ where any mismatch or gaps or insertions are identified with characters that are not "." 
 
+We will need to write a script that will comb through all the results and retrieve these mismatches and record their location and mismatch type so we can create a database we can access later to create our figures and analyze the results further.
+
+
+1. open file
+2. retrieve queryID
+3. retrieve query line
+4. retrieve database reerne seq line
+5. find if database line is not "."
+6. identify location (use strip)
+7. all errors are in refernece to the refernece genome
