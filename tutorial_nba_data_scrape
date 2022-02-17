@@ -1,0 +1,77 @@
+# Scraping Data
+
+This tutorial will outline scraping data using a NBA.com API and processing that data into a model to look at how different teams performed each quarter of a game.
+
+To begin we will need to write a simple script to use with a API that will take in a specific date and pull the information from all NBA games played that day. 
+
+We will need to have a list of all the dates for a season in the NBA. In general the NBA season begins in the Fall (October/November) and ends in Spring (April). We will ignore the playoff/post-season and focus on the regular season schedule. We can look up the date the season starts and ends from Wikipedia. 
+
+The script we need to write will generate all the dates from the start date up until the end date. This will be a simple/routine script to write. October, December, January, and march have 31 days, and November and April has 30 days. February has 28 days except during leap year which it has 29 days.
+
+        def date_generater(start, end, year):
+          # start is start date: tuple
+          # end is end date: tuple
+          # year: year season begins on
+          month = start[0]
+          first = start[1]
+          endmonth = end[0]
+          endday = end[1]
+          season_dates =[]
+          while(month != endmonth):
+              if (month == 10 or month == 12 or month == 1 or month == 3):
+                  last = 31
+              elif(month == 2):
+                  if(year % 4 == 0):
+                      last = 29
+                  else:
+                      last = 28
+              elif(month == 11):
+                  last = 30
+              for i in range(first, last+1):
+                  gameDate = "{}-{}-{}".format(year, month, i)
+                  season_dates.append(gameDate)
+              month+=1
+              first = 1
+              if(month == 13):
+                  month = 1
+                  year += 1
+
+          for i in range(first, endday+1):
+              gameDate = "{}-{}-{}".format(year, month, i)
+              season_dates.append(gameDate)
+          return season_dates
+          
+ Next we will write a script that will call the npa_api library. We will use the Scoreboard endpoint to collect the scores from a single day. There are two parameters we will not need to worry about with is the leagueID and the dayoffset.
+ 
+        def requestScoreBoard(gameDate):
+          leagueID = "00"
+          dayoffset = 0
+          tmp = scoreboard.Scoreboard(dayoffset, gameDate, leagueID)
+          nbaDailyScoreBoard = pd.DataFrame(tmp.line_score.get_dict()['data'][:], columns=tmp.line_score.get_dict()['headers'])
+          return nbaDailyScoreBoard
+          
+The function above will return a dataframe that we will then extract the relevant information we are intersted in and put it into a dictionary and save into a pickle file.
+
+        def sortDailyScores(df):
+          #RETURN  daily dictionary
+
+          #input will be a dataframe
+          #check if any of the games have OT points
+          #pull only : team abbreviation, win-lose record, ptsqr1234 otpts 1 2 3 ,
+          #1. pull unique game ID
+          daily = dict()
+          gameID = list(df['GAME_ID'].unique())
+          if(gameID):
+              for id in gameID:
+                  game = df[df['GAME_ID']==id]
+                  teams = list(game['TEAM_ABBREVIATION'])
+
+                  #for t in teams:
+                  x = list(game[['PTS_QTR1', 'PTS_QTR2', 'PTS_QTR3', 'PTS_QTR4', 'PTS_OT1', 'PTS_OT2', 'PTS_OT3']][
+                               game['TEAM_ABBREVIATION'] == teams[0]].values[0])
+                  y = list(game[['PTS_QTR1', 'PTS_QTR2', 'PTS_QTR3', 'PTS_QTR4', 'PTS_OT1', 'PTS_OT2', 'PTS_OT3']][
+                               game['TEAM_ABBREVIATION'] == teams[1]].values[0])
+                      # print(sum(x))
+                  daily[teams[0]] = {teams[1]: [x,y]}
+                  daily[teams[1]] = {teams[0]: [y,x]}
+          return daily
