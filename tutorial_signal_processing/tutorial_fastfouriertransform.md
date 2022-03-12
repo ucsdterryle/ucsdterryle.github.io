@@ -53,7 +53,7 @@ Lets start by first generating a plot of a sine wave.  To do this we will need t
                 plt.show()
                 
                 
-                ![Sine Wave Plot](/tutorial_signal_processing/tutorial_sine_wave_1.png)
+![Sine Wave Plot](/tutorial_sine_wave_1.png)
 
 
 
