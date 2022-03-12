@@ -63,4 +63,4 @@ The data we will be working with are the pvalues and the brain tissue. We want t
                 plt.show()
                 
                 
-![Manhattan Plot](/pediXcan_manhattanPlot.png)
+![Manhattan Plot](/prediXcan_manhattanPlot.png)
