@@ -58,7 +58,7 @@ Lets start by first generating a plot of a sine wave.  To do this we will need t
 
 Lets use this opprotunity to work with the Matplotlib.pyplot library and also refamiliarize ourselves with some of the technical aspects of trignometric functions, properties of waves, and transformations we can apply to them.
 
-### Amplitute
+### Amplitude
 
 The amplitude of a wave is the length measured from the center of the wave to its peak. We can 'stretch' or compress the amplitude of a wave by simply adding a scalar coefficient to the front of the function. We will add a coefficient greater than 1 and anothe that is between 0 and 1 to the sine function and assign different colors to each plot and compare their similarities and differences.
 
@@ -108,6 +108,78 @@ Notice that the position of the legend is now centered, which we can change. Whi
                 plt.show()
 
 ![Legend Settings Sine Wave Plot](/tutorial_signal_processing/tutorial_sine_wave_4.png)
+
+While what we have is a nice plot with all the functions plotted on one figure, it might be helpful to see the plot independent of one another. In order to achieve this goal of plotting each individual function/plot as it own figure  within a single figure we will use "subplots."
+
+Lets go back and start with the simple plot of sine and cosine.
+
+                x = np.linspace(0, 10, 100)
+
+                plt.plot(x, np.sin(x))
+                plt.plot(x, np.cos(x))
+
+                plt.show()
+
+![Cosine Sine Wave Plot](/tutorial_signal_processing/tutorial_sine_wave_10.png)
+
+                plt.figure()  # create a plot figure
+
+                # create the first of two panels and set current axis
+                plt.subplot(2, 1, 1) # (rows, columns, panel number)
+                plt.plot(x, np.sin(x))
+                plt.grid()
+                
+                # create the second panel and set current axis
+                plt.subplot(2, 1, 2)
+                plt.plot(x, np.cos(x), color='red');
+                plt.grid()
+
+![Subplot Cosine Sine Wave Plot](/tutorial_signal_processing/tutorial_sine_wave_11.png)
+
+
+Lets apply this to the last plot we generated with different amplitudes.
+
+                plt.figure()
+
+                plt.subplot(4, 1, 1) # (rows, columns, panel number)
+                plt.plot(x, np.sin(x*np.pi), color = 'blue', label='Normal')
+                plt.grid()
+
+                plt.subplot(4, 1, 2) # (rows, columns, panel number)
+                plt.plot(x, 0.5*np.sin(x*np.pi), color='red', label='Shrink')
+                plt.grid()
+
+                plt.subplot(4, 1, 3) # (rows, columns, panel number)
+                plt.plot(x, 2*np.sin(x*np.pi), color='green', label='Stretch')
+                plt.grid()
+
+                plt.subplot(4, 1, 4) # (rows, columns, panel number)
+                plt.plot(x, -2*np.sin(x*np.pi), color='yellow', label='Flip')
+                plt.grid()
+
+![Subplot Cosine Sine Wave Plot](/tutorial_signal_processing/tutorial_sine_wave_12.png)
+
+This is nice, but if you notice, all the plots are equal in size despite the two last plots are larger due to their amplitudes.  We can customize the size of the subplots by running the following code.
+
+                f, (a0, a1, a2, a3) = plt.subplots(4, 1, gridspec_kw={'height_ratios': [1, 1, 2, 2]})
+
+                plt.subplot(4, 1, 1) # (rows, columns, panel number)
+                plt.plot(x, np.sin(x*np.pi), color = 'blue', label='Normal')
+                plt.grid()
+
+                plt.subplot(4, 1, 2) # (rows, columns, panel number)
+                plt.plot(x, 0.5*np.sin(x*np.pi), color='red', label='Shrink')
+                plt.grid()
+
+                plt.subplot(4, 1, 3) # (rows, columns, panel number)
+                plt.plot(x, 2*np.sin(x*np.pi), color='green', label='Stretch')
+                plt.grid()
+
+                plt.subplot(4, 1, 4) # (rows, columns, panel number)
+                plt.plot(x, -2*np.sin(x*np.pi), color='yellow', label='Flip')
+                plt.grid()
+
+![Subplot Cosine Sine Wave Plot](/tutorial_signal_processing/tutorial_sine_wave_13.png)
 
 
 ### Frequency
