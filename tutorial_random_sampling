@@ -1,0 +1,45 @@
+# Tutorial on Making Plots from Random Sampling
+
+Keywords: Random Sampling, Uniform Sampling, Sampling from Distribution, Error Bars, 
+
+This tutorial will cover generating plots with the Matplotlib library in the context of random sampling. Must of the examples will be contrived to help with generating more plots with additional attributes such as error bars while giving a quick and informal introduction to random sampling.
+
+
+We will we working with a handful of libraries which we will import at the beginning of our notebook.
+
+                import numpy as np
+
+                import matplotlib.pyplot as plt
+
+Let us first start off by working with a function like a sine function. I choose a sine function since it has a unique shape to it while restricting itself to a range of [-1,1] and has a large (infinite) domain.
+
+                x = np.linspace(-5, 5, 100)
+
+                plt.plot(x, np.sin(x))
+
+                plt.show()
+                
+
+But instead of using the plot function in matplotlib, let us use the scatter function to plot only the points instead of the "line/curve" connecting all the points.
+
+
+                plt.scatter(x, np.sin(x))
+                plt.show()
+                
+                
+                
+We will be using a number of numpy random functions.  The first random function we will dip our toes into is 'random choice'.  The random.choice function parameters are:
+
+                random.choice(a, size=None, replace=True, p=None)
+                
+The first parameter can either be a array/list or a integer value. The 'size' is the output shape. The 'replace' is if the sampling does any with or without replacement. Essentially, if replace=True then we would be able to resample the same element from the list.  We can even assign probability values for each element to have a probability of being selected from the 'p' parameter.
+
+The following code will use the previous list we generated 'y' and use that is the list parameter where we will sample 80 values from the 100 values in 'y'. 
+
+                z = np.random.choice(y, 80)
+
+                plt.scatter(z, np.sin(z*np.pi))
+
+                plt.show()
+                
+                
